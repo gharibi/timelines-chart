@@ -11,12 +11,12 @@ export default Kapsule({
   props: {
     width: { default: 300 },
     height: { default: 20 },
-    margins: { default: { top: 0, right: 0, bottom: 20, left: 0 }},
+    margins: { default: { top: 0, right: 0, bottom: 20, left: 0 } },
     scale: {},
     domainRange: {},
     currentSelection: {},
     tickFormat: {},
-    onChange: { default: (selectionStart, selectionEnd) => {}}
+    onChange: { default: (selectionStart, selectionEnd) => { } }
   },
   init(el, state) {
     state.xGrid = d3AxisBottom()
@@ -26,7 +26,7 @@ export default Kapsule({
       .tickPadding(0);
 
     state.brush = d3BrushX()
-      .on('end', function() {
+      .on('end', function () {
         if (!d3Event.sourceEvent) return;
 
         const selection = d3Event.selection ? d3Event.selection.map(state.scale.invert) : state.scale.domain();
@@ -82,6 +82,6 @@ export default Kapsule({
       .call(state.brush.extent([[0, 0], [brushWidth, brushHeight]]))
       .call(state.brush.move, state.currentSelection.map(state.scale))
       .selectAll('rect')
-        .attr('height', brushHeight);
+      .attr('height', brushHeight);
   }
 });
